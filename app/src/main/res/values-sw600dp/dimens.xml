@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <dimen name="rl_title_height">60dp</dimen>
+    <dimen name="rl_weather_info_margin_left">20dp</dimen>
+    <dimen name="rl_weather_info_tv_name_textSize">60sp</dimen>
+    <dimen name="rl_weather_info_tv_time_and_tv_humidity_textSize">25sp</dimen>
+</resources>

@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <!--按钮按下的效果-->
+    <item android:drawable="@mipmap/title_location_pressed"
+        android:state_pressed="true"></item>
+
+    <item android:drawable="@mipmap/title_location"></item>
+</selector>

@@ -1,0 +1,704 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/bg"
+    tools:context="cn.tedu.weather.ui.MainActivity">
+
+    <RelativeLayout
+        android:id="@+id/rl_title"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/rl_title_height"
+        android:background="#33ffffff" >
+
+        <ImageView
+            android:id="@+id/iv_title_city_manager"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:clickable="true"
+            android:src="@drawable/iv_citiy_manager_selector" />
+
+        <ImageView
+            android:id="@+id/iv_city_seperator"
+            android:layout_width="1dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="2dp"
+            android:layout_toRightOf="@+id/iv_title_city_manager"
+            android:background="#ffffff" />
+
+        <TextView
+            android:id="@+id/tv_title_city_name"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_toRightOf="@+id/iv_city_seperator"
+            android:gravity="center_vertical"
+            android:paddingLeft="5dp"
+            android:text="绍兴天气"
+            android:textColor="#fff"
+            android:textSize="22sp" />
+
+        <ImageView
+            android:id="@+id/iv_title_update"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:layout_alignParentRight="true"
+            android:clickable="true"
+            android:src="@drawable/iv_update_selector" />
+
+        <ImageView
+            android:id="@+id/iv_title_share"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:clickable="true"
+            android:layout_toLeftOf="@+id/iv_title_update"
+            android:src="@drawable/iv_share_selector" />
+
+        <ImageView
+            android:id="@+id/iv_title_location"
+            android:layout_width="45dp"
+            android:layout_height="45dp"
+            android:clickable="true"
+            android:layout_toLeftOf="@+id/iv_title_share"
+            android:src="@drawable/iv_location_selector" />
+    </RelativeLayout>
+    <!-- 内容区 -->
+
+    <LinearLayout
+        android:id="@+id/ll_content"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/rl_title"
+        android:orientation="vertical" >
+
+        <!-- 当前天气信息 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_weather_info"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_alignParentStart="true"
+            android:layout_alignParentTop="true"
+            android:padding="10dp">
+
+            <!-- 城市名称 -->
+
+            <TextView
+                android:id="@+id/tv_city"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="@dimen/rl_weather_info_margin_left"
+                android:singleLine="true"
+                android:text="绍兴"
+                android:textColor="#ffffff"
+                android:textSize="@dimen/rl_weather_info_tv_name_textSize" />
+            <!-- CTRL+SHIFT+? 发布时间 -->
+
+            <TextView
+                android:id="@+id/tv_time"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_city"
+                android:layout_marginLeft="@dimen/rl_weather_info_margin_left"
+                android:layout_marginTop="5dp"
+                android:singleLine="true"
+                android:text="今天13:50发布"
+                android:textColor="#aaffffff"
+                android:textSize="@dimen/rl_weather_info_tv_time_and_tv_humidity_textSize" />
+            <!-- CTRL+SHIFT+? 湿度信息 -->
+
+            <TextView
+                android:id="@+id/tv_humidity"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_time"
+                android:layout_marginLeft="@dimen/rl_weather_info_margin_left"
+                android:layout_marginTop="5dp"
+                android:singleLine="true"
+                android:text="湿度:80%"
+                android:textColor="#aaffffff"
+                android:textSize="@dimen/rl_weather_info_tv_time_and_tv_humidity_textSize" />
+            <TextView
+                android:id="@+id/tv_temp_info"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_humidity"
+                android:layout_marginLeft="@dimen/rl_weather_info_margin_left"
+                android:layout_marginTop="5dp"
+                android:singleLine="true"
+                android:text="温度:30℃"
+                android:textColor="#aaffffff"
+                android:textSize="@dimen/rl_weather_info_tv_time_and_tv_humidity_textSize" />
+            <!-- PM2.5整体信息块 -->
+
+            <LinearLayout
+                android:id="@+id/ll_pm2_5_desc"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentRight="true"
+                android:orientation="vertical">
+
+                <!-- PM2.5详情 -->
+
+                <LinearLayout
+                    android:id="@+id/ll_pm2_5_content"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:paddingBottom="6dp"
+                    android:paddingLeft="12dp"
+                    android:paddingRight="12dp"
+                    android:paddingTop="6dp">
+
+                    <!-- PM2.5文字详情 -->
+
+                    <LinearLayout
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:orientation="vertical">
+
+                        <!-- PM2.5 -->
+
+                        <TextView
+                            android:id="@+id/tv_pm2_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="PM2.5"
+                            android:textColor="#aaffffff"
+                            android:textSize="12sp" />
+                        <!-- PM2.5数值 -->
+
+                        <TextView
+                            android:id="@+id/tv_pm_data"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:text="40"
+                            android:textColor="#aaffffff"
+                            android:textSize="30sp" />
+                    </LinearLayout>
+                    <!-- PM2.5图片 -->
+
+                    <ImageView
+                        android:id="@+id/iv_pm2_5"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginLeft="5dp"
+                        android:src="@mipmap/weather_0_100" />
+                </LinearLayout>
+                <!-- 污染等级(重度污染) -->
+
+                <TextView
+                    android:id="@+id/tv_quality"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="重度污染"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+            </LinearLayout>
+        </RelativeLayout>
+        <!-- 当日天气信息模块 -->
+
+        <RelativeLayout
+            android:id="@+id/rl_weather_today"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="5dp" >
+
+            <ImageView
+                android:id="@+id/iv_weather"
+                android:layout_width="120dp"
+                android:layout_height="120dp"
+                android:src="@mipmap/weather_qing" />
+
+            <TextView
+                android:id="@+id/tv_week"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="5dp"
+                android:layout_toRightOf="@+id/iv_weather"
+                android:text="今天 星期二"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/tv_temperature"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_week"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@+id/iv_weather"
+                android:text="15℃~30℃"
+                android:textColor="#ffffff"
+                android:textSize="30sp" />
+
+            <TextView
+                android:id="@+id/tv_climate"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_temperature"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@+id/iv_weather"
+                android:text="晴天"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+            <TextView
+                android:id="@+id/tv_wind"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/tv_climate"
+                android:layout_marginLeft="5dp"
+                android:layout_marginTop="2dp"
+                android:layout_toRightOf="@+id/iv_weather"
+                android:text="微风"
+                android:textColor="#ffffff"
+                android:textSize="20sp" />
+        </RelativeLayout>
+        <HorizontalScrollView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content">
+
+        <!--未来七天天气模块-->
+        <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content">
+
+            <!--未来第一天-->
+<LinearLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+                android:id="@+id/rl_future_weather_today_1"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+        >
+
+
+            <TextView
+                    android:id="@+id/tv_week_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+                    android:text="星期三"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+            <ImageView
+                    android:id="@+id/iv_weather_1"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@+id/tv_week_1"
+                    android:src="@mipmap/weather_qing" />
+
+            <TextView
+                    android:id="@+id/tv_temperature_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_weather_1"
+                    android:layout_marginTop="2dp"
+                    android:text="15℃~30℃"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+            <TextView
+                    android:id="@+id/tv_climate_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_temperature_1"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="2dp"
+                    android:text="晴天"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+            <TextView
+                    android:id="@+id/tv_wind_1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_climate_1"
+                    android:gravity="center"
+                    android:layout_marginTop="2dp"
+                    android:text="大概有方向微风"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+        </RelativeLayout></LinearLayout>
+
+            <!--未来第二天-->
+    <LinearLayout
+
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+        <RelativeLayout
+                android:id="@+id/rl_future_weather_today_2"
+                android:layout_width="match_parent"
+                android:singleLine="true"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:layout_marginLeft="30dp"
+        >
+
+
+            <TextView
+                    android:id="@+id/tv_week_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="18dp"
+
+                    android:text="星期四"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+
+            <ImageView
+                    android:id="@+id/iv_weather_2"
+                    android:layout_width="60dp"
+                    android:layout_height="60dp"
+                    android:layout_marginLeft="10dp"
+                    android:layout_below="@+id/tv_week_2"
+
+                    android:src="@mipmap/weather_qing" />
+
+            <TextView
+                    android:id="@+id/tv_temperature_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/iv_weather_2"
+
+                    android:layout_marginTop="2dp"
+                    android:layout_marginLeft="0dp"
+                    android:text="15℃~30℃"
+                    android:textColor="#ffffff"
+                    android:textSize="20sp" />
+
+            <TextView
+                    android:id="@+id/tv_climate_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_temperature_2"
+
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="2dp"
+                    android:text="晴天"
+                    android:gravity="center"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+            <TextView
+                    android:id="@+id/tv_wind_2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/tv_climate_2"
+                    android:gravity="center"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginTop="2dp"
+                    android:text="大概有方向微风"
+                    android:textColor="#ffffff"
+                    android:textSize="15sp" />
+            </RelativeLayout>
+    </LinearLayout>
+            <!--未来第三天-->
+            <LinearLayout
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <RelativeLayout
+                        android:id="@+id/rl_future_weather_today_3"
+                        android:layout_width="match_parent"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="30dp"
+                >
+
+
+                    <TextView
+                            android:id="@+id/tv_week_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="18dp"
+
+                            android:text="星期五"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp" />
+
+                    <ImageView
+                            android:id="@+id/iv_weather_3"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_below="@+id/tv_week_3"
+
+                            android:src="@mipmap/weather_qing" />
+
+                    <TextView
+                            android:id="@+id/tv_temperature_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_weather_3"
+
+                            android:layout_marginTop="2dp"
+                            android:layout_marginLeft="0dp"
+                            android:text="15℃~30℃"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+
+                    <TextView
+                            android:id="@+id/tv_climate_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_temperature_3"
+
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="2dp"
+                            android:text="晴天"
+                            android:gravity="center"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp" />
+                    <TextView
+                            android:id="@+id/tv_wind_3"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_climate_3"
+                            android:gravity="center"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="2dp"
+                            android:text="大概有方向微风"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!--未来第四天-->
+            <LinearLayout
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <RelativeLayout
+                        android:id="@+id/rl_future_weather_today_4"
+                        android:layout_width="match_parent"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="30dp"
+                >
+
+
+                    <TextView
+                            android:id="@+id/tv_week_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="18dp"
+
+                            android:text="星期六"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp" />
+
+                    <ImageView
+                            android:id="@+id/iv_weather_4"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_below="@+id/tv_week_4"
+
+                            android:src="@mipmap/weather_qing" />
+
+                    <TextView
+                            android:id="@+id/tv_temperature_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_weather_4"
+
+                            android:layout_marginTop="2dp"
+                            android:layout_marginLeft="0dp"
+                            android:text="15℃~30℃"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+
+                    <TextView
+                            android:id="@+id/tv_climate_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_temperature_4"
+
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="2dp"
+                            android:text="晴天"
+                            android:gravity="center"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp" />
+                    <TextView
+                            android:id="@+id/tv_wind_4"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_climate_4"
+                            android:gravity="center"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="2dp"
+                            android:text="大概有方向微风"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!--未来第五天-->
+            <LinearLayout
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <RelativeLayout
+                        android:id="@+id/rl_future_weather_today_5"
+                        android:layout_width="match_parent"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="30dp"
+                >
+
+
+                    <TextView
+                            android:id="@+id/tv_week_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="18dp"
+
+                            android:text="星期日"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp" />
+
+                    <ImageView
+                            android:id="@+id/iv_weather_5"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_below="@+id/tv_week_5"
+
+                            android:src="@mipmap/weather_qing" />
+
+                    <TextView
+                            android:id="@+id/tv_temperature_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_weather_5"
+
+                            android:layout_marginTop="2dp"
+                            android:layout_marginLeft="0dp"
+                            android:text="15℃~30℃"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+
+                    <TextView
+                            android:id="@+id/tv_climate_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_temperature_5"
+
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="2dp"
+                            android:text="晴天"
+                            android:gravity="center"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp" />
+                    <TextView
+                            android:id="@+id/tv_wind_5"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_climate_5"
+                            android:gravity="center"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="2dp"
+                            android:text="大概有方向微风"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+            <!--未来第四天-->
+            <LinearLayout
+
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content">
+
+                <RelativeLayout
+                        android:id="@+id/rl_future_weather_today_6"
+                        android:layout_width="match_parent"
+                        android:singleLine="true"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginLeft="30dp"
+                >
+
+
+                    <TextView
+                            android:id="@+id/tv_week_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="18dp"
+
+                            android:text="星期一"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp" />
+
+                    <ImageView
+                            android:id="@+id/iv_weather_6"
+                            android:layout_width="60dp"
+                            android:layout_height="60dp"
+                            android:layout_marginLeft="10dp"
+                            android:layout_below="@+id/tv_week_6"
+
+                            android:src="@mipmap/weather_qing" />
+
+                    <TextView
+                            android:id="@+id/tv_temperature_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/iv_weather_6"
+
+                            android:layout_marginTop="2dp"
+                            android:layout_marginLeft="0dp"
+                            android:text="15℃~30℃"
+                            android:textColor="#ffffff"
+                            android:textSize="20sp" />
+
+                    <TextView
+                            android:id="@+id/tv_climate_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_temperature_6"
+
+                            android:layout_marginLeft="25dp"
+                            android:layout_marginTop="2dp"
+                            android:text="晴天"
+                            android:gravity="center"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp" />
+                    <TextView
+                            android:id="@+id/tv_wind_6"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_below="@+id/tv_climate_6"
+                            android:gravity="center"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginTop="2dp"
+                            android:text="大概有方向微风"
+                            android:textColor="#ffffff"
+                            android:textSize="15sp" />
+                </RelativeLayout>
+            </LinearLayout>
+
+        </LinearLayout>
+        </HorizontalScrollView>
+
+
+
+
+    </LinearLayout>
+</RelativeLayout>
